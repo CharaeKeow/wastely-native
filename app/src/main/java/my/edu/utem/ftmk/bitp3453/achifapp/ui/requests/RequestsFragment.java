@@ -1,4 +1,4 @@
-package my.edu.utem.ftmk.bitp3453.achifapp.ui.dashboard;
+package my.edu.utem.ftmk.bitp3453.achifapp.ui.requests;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,20 +12,19 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import my.edu.utem.ftmk.bitp3453.achifapp.R;
-import my.edu.utem.ftmk.bitp3453.achifapp.databinding.FragmentDashboardBinding;
+import my.edu.utem.ftmk.bitp3453.achifapp.databinding.FragmentRequestsBinding;
 
-public class DashboardFragment extends Fragment {
+public class RequestsFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
-    private FragmentDashboardBinding binding;
+    private RequestsViewModel dashboardViewModel;
+    private FragmentRequestsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+                new ViewModelProvider(this).get(RequestsViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentRequestsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textDashboard;

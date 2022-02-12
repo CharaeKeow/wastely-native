@@ -1,4 +1,4 @@
-package my.edu.utem.ftmk.bitp3453.achifapp.ui.notifications;
+package my.edu.utem.ftmk.bitp3453.achifapp.ui.listing;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,20 +12,19 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import my.edu.utem.ftmk.bitp3453.achifapp.R;
-import my.edu.utem.ftmk.bitp3453.achifapp.databinding.FragmentNotificationsBinding;
+import my.edu.utem.ftmk.bitp3453.achifapp.databinding.FragmentListingBinding;
 
-public class NotificationsFragment extends Fragment {
+public class ListingFragment extends Fragment {
 
-    private NotificationsViewModel notificationsViewModel;
-    private FragmentNotificationsBinding binding;
+    private ListingViewModel notificationsViewModel;
+    private FragmentListingBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel =
-                new ViewModelProvider(this).get(NotificationsViewModel.class);
+                new ViewModelProvider(this).get(ListingViewModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentListingBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;

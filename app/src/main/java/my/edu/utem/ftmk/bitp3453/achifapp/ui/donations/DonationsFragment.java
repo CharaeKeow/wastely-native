@@ -1,4 +1,4 @@
-package my.edu.utem.ftmk.bitp3453.achifapp.ui.home;
+package my.edu.utem.ftmk.bitp3453.achifapp.ui.donations;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,20 +12,19 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import my.edu.utem.ftmk.bitp3453.achifapp.R;
-import my.edu.utem.ftmk.bitp3453.achifapp.databinding.FragmentHomeBinding;
+import my.edu.utem.ftmk.bitp3453.achifapp.databinding.FragmentDonationsBinding;
 
-public class HomeFragment extends Fragment {
+public class DonationsFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
-    private FragmentHomeBinding binding;
+    private DonationsViewModel homeViewModel;
+    private FragmentDonationsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+                new ViewModelProvider(this).get(DonationsViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentDonationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textHome;

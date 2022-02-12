@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="my.edu.utem.ftmk.bitp3453.achifapp.ui.home.HomeFragment"
+        android:name="my.edu.utem.ftmk.bitp3453.achifapp.ui.donations.DonationsFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_donations" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="my.edu.utem.ftmk.bitp3453.achifapp.ui.dashboard.DashboardFragment"
+        android:name="my.edu.utem.ftmk.bitp3453.achifapp.ui.requests.RequestsFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_requests" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="my.edu.utem.ftmk.bitp3453.achifapp.ui.notifications.NotificationsFragment"
+        android:name="my.edu.utem.ftmk.bitp3453.achifapp.ui.listing.ListingFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_listing" />
 </navigation>

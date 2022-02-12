@@ -1,16 +1,16 @@
-package my.edu.utem.ftmk.bitp3453.achifapp.ui.home;
+package my.edu.utem.ftmk.bitp3453.achifapp.ui.listing;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class ListingViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public ListingViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("This is notifications fragment");
     }
 
     public LiveData<String> getText() {
