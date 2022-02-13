@@ -16,19 +16,19 @@ import my.edu.utem.ftmk.bitp3453.achifapp.databinding.FragmentListingBinding;
 
 public class ListingFragment extends Fragment {
 
-    private ListingViewModel notificationsViewModel;
+    private ListingViewModel listingViewModel;
     private FragmentListingBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
+        listingViewModel =
                 new ViewModelProvider(this).get(ListingViewModel.class);
 
         binding = FragmentListingBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        listingViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

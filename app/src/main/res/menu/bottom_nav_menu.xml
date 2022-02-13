@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_donations"
         android:icon="@drawable/ic_baseline_shopping_basket_24"
         android:title="@string/title_donations" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_requests"
         android:icon="@drawable/ic_baseline_flag_24"
         android:title="@string/title_requests" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_listing"
         android:icon="@drawable/ic_baseline_person_24"
-        android:title="@string/title_my_listings" />
+        android:title="@string/title_mylisting" />
 
 </menu>

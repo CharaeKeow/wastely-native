@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#adb9cc">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:fontFamily="helvetica"
+            android:gravity="center"
+            android:text="@string/donate"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/btn_add_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/add_image"
+            android:onClick="addDonationImage"/>
+
+        <ImageView
+            android:id="@+id/donation_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/donation_image"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <androidx.cardview.widget.CardView
+                xmlns:Card_View="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:padding="10dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                Card_View:cardCornerRadius="5dp"
+                Card_View:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/label_donation_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="#000000"
+                        app:hintTextColor="#000000"
+                        app:boxStrokeColor="#000000">
+
+                        <EditText
+                            android:id="@+id/donation_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="@string/title"
+                            android:textSize="20sp"
+                            android:fontFamily="helvetica"
+                            android:inputType="text"
+                            android:textColor="#000000"
+                            android:textColorHint="#000000"
+                            android:backgroundTint="@android:color/transparent"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:importantForAutofill="no"
+                            tools:ignore="UnusedAttribute" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/label_phone_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:textColorHint="#000000"
+                            app:hintTextColor="#000000"
+                            app:boxStrokeColor="#000000">
+
+                            <EditText
+                                android:id="@+id/phone_number"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:hint="@string/phone_number"
+                                android:textSize="20sp"
+                                android:fontFamily="helvetica"
+                                android:backgroundTint="@android:color/transparent"
+                                android:maxLength="12"
+                                android:inputType="phone"
+                                android:textColor="#000000"
+                                android:textColorHint="#000000"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:importantForAutofill="no"
+                                tools:ignore="UnusedAttribute" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/label_pick_up_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:textColorHint="#000000"
+                        app:hintTextColor="#000000"
+                        app:boxStrokeColor="#000000">
+
+                        <EditText
+                            android:id="@+id/pick_up_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="@string/pick_up_time"
+                            android:textSize="20sp"
+                            android:fontFamily="helvetica"
+                            android:textColor="#000000"
+                            android:textColorHint="#000000"
+                            android:inputType="text"
+                            android:backgroundTint="@android:color/transparent"
+                            android:maxLines="2"
+                            android:singleLine="true"
+                            android:importantForAutofill="no"
+                            tools:ignore="UnusedAttribute" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/label_quantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:textColorHint="#000000"
+                        app:hintTextColor="#000000"
+                        app:boxStrokeColor="#000000">
+
+                        <EditText
+                            android:id="@+id/donation_quantity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="@string/donation_quantity"
+                            android:textSize="20sp"
+                            android:fontFamily="helvetica"
+                            android:textColor="#000000"
+                            android:textColorHint="#000000"
+                            android:inputType="text"
+                            android:backgroundTint="@android:color/transparent"
+                            android:maxLines="2"
+                            android:singleLine="true"
+                            android:importantForAutofill="no"
+                            tools:ignore="UnusedAttribute" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:textColorHint="#000000"
+                        app:hintTextColor="#000000"
+                        android:textSize="20sp"
+                        android:fontFamily="helvetica"
+                        app:boxStrokeColor="#000000">
+
+                        <EditText
+                            android:id="@+id/description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="@string/description"
+                            android:textSize="20sp"
+                            android:fontFamily="helvetica"
+                            android:inputType="textMultiLine"
+                            android:maxLines="10"
+                            android:textColor="#000000"
+                            android:textColorHint="#000000"
+                            android:backgroundTint="@android:color/transparent"
+                            android:importantForAutofill="no"
+                            tools:ignore="UnusedAttribute" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/btn_submit_donation"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_margin="20dp"
+                        android:text="@string/submit"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"
+                        app:cardCornerRadius="20dp"
+                        android:onClick="submitDonation"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>
+

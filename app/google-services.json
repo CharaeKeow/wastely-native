@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "865358066716",
+    "firebase_url": "https://achif-donate-app-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "achif-donate-app",
+    "storage_bucket": "achif-donate-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:865358066716:android:f20af8151b89b8f36b1bd9",
+        "android_client_info": {
+          "package_name": "my.edu.utem.ftmk.bitp3453.achifapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "865358066716-2q7dt27oec6s6qs1gtpcmmcsuk98vprb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYCc8Gjh28tHeQC4ldCglx51NhdeVN3Kk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "865358066716-2q7dt27oec6s6qs1gtpcmmcsuk98vprb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

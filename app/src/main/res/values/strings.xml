@@ -6,4 +6,19 @@
     <string name="title_donations">Donations</string>
     <string name="title_requests">Requests</string>
     <string name="title_my_listings">My Listings</string>
+    <string name="title_mylisting">MyListing</string>
+    <string name="add_donation">Add Donation</string>
+    <string name="submit">Submit</string>
+    <string name="description">Description</string>
+    <string name="food_name">Food Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="title">Title</string>
+    <string name="donate">Add Donation</string>
+    <string name="pick_up_time">Pick-up time</string>
+    <string name="add_image">Add Image</string>
+    <string name="donation_image">Donation image</string>
+    <string name="replace_image">Replace Image</string>
+    <string name="donation_quantity">Quantity</string>
+    <string name="donation_title">Donation Title</string>
+    <string name="quantity">Quantity</string>
 </resources>

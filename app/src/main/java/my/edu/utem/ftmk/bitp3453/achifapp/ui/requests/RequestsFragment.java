@@ -16,19 +16,19 @@ import my.edu.utem.ftmk.bitp3453.achifapp.databinding.FragmentRequestsBinding;
 
 public class RequestsFragment extends Fragment {
 
-    private RequestsViewModel dashboardViewModel;
+    private RequestsViewModel requestsViewModel;
     private FragmentRequestsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
+        requestsViewModel =
                 new ViewModelProvider(this).get(RequestsViewModel.class);
 
         binding = FragmentRequestsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        requestsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
