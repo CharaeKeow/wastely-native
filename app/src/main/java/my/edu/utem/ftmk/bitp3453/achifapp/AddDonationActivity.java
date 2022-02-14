@@ -1,51 +1,53 @@
 package my.edu.utem.ftmk.bitp3453.achifapp;
 
-import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.camera.core.Camera;
-import androidx.camera.core.CameraSelector;
-import androidx.camera.core.ImageCapture;
-import androidx.camera.core.Preview;
-import androidx.camera.lifecycle.ProcessCameraProvider;
-import androidx.camera.view.PreviewView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.media.Image;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Size;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.CancellationTokenSource;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.common.util.concurrent.ListenableFuture;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.ExecutionException;
+import java.util.Locale;
 
-public class AddDonationActivity extends AppCompatActivity {
+public class AddDonationActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private boolean hasImage = false;
@@ -54,6 +56,13 @@ public class AddDonationActivity extends AppCompatActivity {
     private EditText edtDonationTitle, edtPhoneNo, edtPickUpTime, edtDescription, edtQuantity;
     private String donationTitle, phoneNo, pickUpTime, description, quantity;
     private Button btnSubmit;
+    private TextView txtLocation;
+    private double longitude, latitude;
+
+    //for location services
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    private String token;
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,17 +70,49 @@ public class AddDonationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donate);
 
-        if(hasImage) {
-            Button btnAddImage = findViewById(R.id.btn_add_image);
-            btnAddImage.setText(R.string.replace_image);
-        }
-
         edtDonationTitle = findViewById(R.id.donation_title);
         edtPhoneNo = findViewById(R.id.phone_number);
         edtPickUpTime = findViewById(R.id.pick_up_time);
         edtDescription = findViewById(R.id.description);
         edtQuantity = findViewById(R.id.donation_quantity);
         btnSubmit = findViewById(R.id.btn_submit_donation);
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        txtLocation = findViewById(R.id.txtLocation);
+
+        CancellationTokenSource cts = new CancellationTokenSource();
+
+        ActivityResultLauncher<String[]> locationPermissionRequest =
+                registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
+                   Boolean fineLocationGranted = result.getOrDefault(
+                           Manifest.permission.ACCESS_FINE_LOCATION, false);
+                   Boolean coarseLocationGranted = result.getOrDefault(
+                           Manifest.permission.ACCESS_COARSE_LOCATION, false);
+
+                   if (fineLocationGranted != null && fineLocationGranted) {
+                       fusedLocationProviderClient.getLastLocation()
+                               .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                                   @Override
+                                   public void onSuccess(Location location) {
+                                       if (location != null) {
+                                           txtLocation.setText(String.format(Locale.getDefault(), "%f. %f", location.getLatitude(), location.getLongitude()));
+                                           longitude = location.getLongitude();
+                                           latitude = location.getLatitude();
+                                       }
+                                   }
+                               });
+                   }
+                });
+
+        locationPermissionRequest.launch(new String[] {
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+        });
+
+        // Get the SupportMapFragment and request notification when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.add_donation_map);
+        mapFragment.getMapAsync(this);
     }
 
     public void addDonationImage(View view) {
@@ -100,13 +141,6 @@ public class AddDonationActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-
-            ImageView imageView = findViewById(R.id.donation_image);
-            imageView.setImageBitmap(imageBitmap);
-        }
     }
 
     private File createImageFile() throws IOException {
@@ -147,7 +181,7 @@ public class AddDonationActivity extends AppCompatActivity {
         CollectionReference dbDonation = db.collection("donation");
 
         //create new donation
-        Donation donation = new Donation(donationTitle, phoneNo, description, pickUpTime, quantity);
+        Donation donation = new Donation(donationTitle, phoneNo, description, pickUpTime, quantity, latitude, longitude);
 
         //add to Firestore
         dbDonation.add(donation).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -162,5 +196,14 @@ public class AddDonationActivity extends AppCompatActivity {
                 Toast.makeText(AddDonationActivity.this, "Fail to add a new donation. Please try again.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        mMap = googleMap;
+
+        LatLng sydney = new LatLng(latitude, longitude);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }

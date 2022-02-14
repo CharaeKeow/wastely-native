@@ -21,4 +21,8 @@
     <string name="donation_quantity">Quantity</string>
     <string name="donation_title">Donation Title</string>
     <string name="quantity">Quantity</string>
+    <string name="todo">TODO</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_logout">Logout confirmation</string>
+    <string name="label_logout">Are you sure you want to logout?</string>
 </resources>

@@ -6,18 +6,22 @@ public class Donation {
     private String description;
     private String pickUpTime;
     private String quantity;
+    private double latitude;
+    private double longitude;
     //private int[] coordinate = {12, 133};
     //private String userID; //id of person who created this
     //private boolean isPickUp;
 
     public Donation() {}
 
-    public Donation(String donationTitle, String phoneNo, String description, String pickUpTime, String quantity) {
+    public Donation(String donationTitle, String phoneNo, String description, String pickUpTime, String quantity, double latitude, double longitude) {
         this.donationTitle = donationTitle;
         this.phoneNo = phoneNo;
         this.description = description;
         this.pickUpTime = pickUpTime;
         this.quantity = quantity;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public String getDonationTitle() {
@@ -58,6 +62,22 @@ public class Donation {
 
     public void setQuantity(String quantity) {
         this.quantity = quantity;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
     //private String requesterID; //id of person who requested this
 }
