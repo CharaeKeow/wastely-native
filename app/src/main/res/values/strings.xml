@@ -25,4 +25,5 @@
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_logout">Logout confirmation</string>
     <string name="label_logout">Are you sure you want to logout?</string>
+    <string name="add_new_request">Add New Request</string>
 </resources>

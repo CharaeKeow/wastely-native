@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,6 +27,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,6 +38,7 @@ import java.util.Locale;
 public class AddDonationActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private FirebaseFirestore db;
+    private FirebaseAuth auth;
     private EditText edtDonationTitle, edtPhoneNo, edtPickUpTime, edtDescription, edtQuantity;
     private String donationTitle, phoneNo, pickUpTime, description, quantity;
     private Button btnSubmit;
@@ -49,7 +53,7 @@ public class AddDonationActivity extends AppCompatActivity implements OnMapReady
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_donate);
+        setContentView(R.layout.activity_add_donation);
 
         edtDonationTitle = findViewById(R.id.donation_title);
         edtPhoneNo = findViewById(R.id.phone_number);
@@ -122,25 +126,30 @@ public class AddDonationActivity extends AppCompatActivity implements OnMapReady
 
     public void addToFirestore(String donationTitle, String phoneNo, String description, String pickUpTime, String quantity) {
         db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
 
-        CollectionReference dbDonation = db.collection("donation");
+        FirebaseUser currentUser = auth.getCurrentUser();
 
-        //create new donation
-        Donation donation = new Donation(donationTitle, phoneNo, description, pickUpTime, quantity, latitude, longitude);
+        if (currentUser != null) {
+            CollectionReference dbDonation = db.collection("donation");
 
-        //add to Firestore
-        dbDonation.add(donation).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText(AddDonationActivity.this, "Donation successfully added!", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(AddDonationActivity.this, "Fail to add a new donation. Please try again.", Toast.LENGTH_SHORT).show();
-            }
-        });
+            //create new donation
+            Donation donation = new Donation(donationTitle, phoneNo, description, pickUpTime, quantity, latitude, longitude, currentUser.getUid());
+
+            //add to Firestore
+            dbDonation.add(donation).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+                    Toast.makeText(AddDonationActivity.this, "Donation successfully added!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(AddDonationActivity.this, "Fail to add a new donation. Please try again.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     @Override

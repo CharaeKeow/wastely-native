@@ -19,7 +19,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.List;
 import java.util.Vector;
 
 public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.ViewHolder> {
@@ -45,6 +53,8 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.ViewHo
             TextView description = v.findViewById(R.id.item_donation_description);
             TextView phoneNo = v.findViewById(R.id.item_donation_phone_no);
             TextView pickUpTime = v.findViewById(R.id.item_donation_pickup_time);
+            TextView coordinate = v.findViewById(R.id.item_donation_coordinate);
+            TextView userID = v.findViewById(R.id.item_donation_donor_id);
 
             Intent intent = new Intent(v.getContext(), DonationDetailActivity.class);
             intent.putExtra("donationTitle", donationTitle.getText().toString());
@@ -64,15 +74,12 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.ViewHo
         Donation donation = donations.get(position);
 
         holder.txtDonationTitle.setText(donation.getDonationTitle());
-        holder.txtDescription.setText(donation.getDescription());
-        holder.txtPhoneNo.setText(donation.getPhoneNo());
-        holder.txtPickUpTime.setText(donation.getPickUpTime());
-        holder.txtQuantity.setText(donation.getQuantity());
-
-        GoogleMap thisMap = holder.mapCurrent;
-        if (thisMap != null) {
-            thisMap.addMarker(new MarkerOptions().position(new LatLng(donation.getLatitude(), donation.getLongitude())));
-        }
+        holder.txtDescription.setText(String.format("Description %s", donation.getDescription()));
+        holder.txtPhoneNo.setText(String.format("Phone number: %s", donation.getPhoneNo()));
+        holder.txtPickUpTime.setText(String.format("Pick-up Time: %s", donation.getPickUpTime()));
+        holder.txtQuantity.setText(String.format("Quantity: %s", donation.getQuantity()));
+        holder.txtDonorID.setText(String.format("Donor ID: %s", donation.getDonorID()));
+        holder.txtCoordinate.setText(String.format("Coordinate: %s, %s", donation.getLatitude(), donation.getLongitude()));
     }
 
     @Override
@@ -80,31 +87,19 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.ViewHo
         return donations.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements OnMapReadyCallback {
-        private final TextView txtDonationTitle, txtPhoneNo, txtPickUpTime, txtQuantity, txtDescription;
-        private GoogleMap mapCurrent;
-        MapView map;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView txtDonationTitle, txtPhoneNo, txtPickUpTime, txtQuantity, txtDescription, txtDonorID, txtCoordinate;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            map = itemView.findViewById(R.id.item_donation_map);
-            if (map != null) {
-                //map.onCreate(null);
-               // map.onResume();
-                //map.getMapAsync(this);
-            }
 
             txtDonationTitle = itemView.findViewById(R.id.item_donation_title);
             txtDescription = itemView.findViewById(R.id.item_donation_description);
             txtPhoneNo = itemView.findViewById(R.id.item_donation_phone_no);
             txtPickUpTime = itemView.findViewById(R.id.item_donation_pickup_time);
             txtQuantity = itemView.findViewById(R.id.item_donation_quantity);
+            txtDonorID = itemView.findViewById(R.id.item_donation_donor_id);
+            txtCoordinate = itemView.findViewById(R.id.item_donation_coordinate);
         }
-
-        @Override
-        public void onMapReady(@NonNull GoogleMap googleMap) {
-            mapCurrent = googleMap;
-        }
-
     }
 }

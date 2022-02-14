@@ -2,6 +2,7 @@ package my.edu.utem.ftmk.bitp3453.achifapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -90,6 +91,15 @@ public class RegisterActivity extends AppCompatActivity
                         User user = new User(currentUser.getUid(), userName, userEmail, userPhoneNo);
 
                         dbUser.add(user);
+
+                        SharedPreferences sharedPreferences = getSharedPreferences("my.edu.utem.ftmk.bitp3453.achifapp", MODE_PRIVATE);
+
+                        sharedPreferences.edit()
+                                .putString("userID", currentUser.getUid())
+                                .putString("userName", userName)
+                                .putString("phoneNo", userPhoneNo)
+                                .putString("email", userEmail)
+                                .apply();
 
                         progressDialog.dismiss();
                         sendUserToNextActivity();

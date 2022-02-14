@@ -25,30 +25,11 @@ public class MainActivity extends AppCompatActivity {
 
     public static Context context;
     private ActivityMainBinding binding;
-    private String user;
-    private FirebaseAuth auth;
-    private FirebaseAuth.AuthStateListener authStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        auth = FirebaseAuth.getInstance();
-
-        /*
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-
-                if (currentUser!=null) {
-                    user = true;
-                } else {
-                    setContentView(R.layout.activity_login_options_page);
-                }
-            }
-        };
-        */
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -62,28 +43,15 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(MainActivity.this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
-        /*
-        if (!user) {
-            setContentView(R.layout.activity_login_options_page);
-        } else {
-            binding = ActivityMainBinding.inflate(getLayoutInflater());
-            setContentView(binding.getRoot());
-
-            BottomNavigationView navView = findViewById(R.id.nav_view);
-            // Passing each menu ID as a set of Ids because each
-            // menu should be considered as top level destinations.
-            AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.navigation_donations, R.id.navigation_requests, R.id.navigation_listing)
-                    .build();
-            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-            NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-            NavigationUI.setupWithNavController(binding.navView, navController);
-        }*/
     }
 
     public void addDonation(View view) {
         Intent intent = new Intent(this, AddDonationActivity.class);
+        startActivity(intent);
+    }
+
+    public void addRequest(View view) {
+        Intent intent = new Intent(this, AddRequestActivity.class);
         startActivity(intent);
     }
 

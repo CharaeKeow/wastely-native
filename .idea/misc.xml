@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/src/ACHIFApp/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.2703125" />
         <entry key="..\:/src/ACHIFApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
+        <entry key="..\:/src/ACHIFApp/app/src/main/res/layout/activity_add_donation.xml" value="0.13958333333333334" />
+        <entry key="..\:/src/ACHIFApp/app/src/main/res/layout/activity_add_request.xml" value="0.13958333333333334" />
         <entry key="..\:/src/ACHIFApp/app/src/main/res/layout/activity_camera.xml" value="0.264" />
         <entry key="..\:/src/ACHIFApp/app/src/main/res/layout/activity_donate.xml" value="0.2" />
         <entry key="..\:/src/ACHIFApp/app/src/main/res/layout/activity_donation_detail.xml" value="0.264" />
@@ -16,11 +18,12 @@
         <entry key="..\:/src/ACHIFApp/app/src/main/res/layout/activity_test.xml" value="0.18072916666666666" />
         <entry key="..\:/src/ACHIFApp/app/src/main/res/layout/donation_item.xml" value="0.264" />
         <entry key="..\:/src/ACHIFApp/app/src/main/res/layout/fragment_dashboard.xml" value="0.25416666666666665" />
-        <entry key="..\:/src/ACHIFApp/app/src/main/res/layout/fragment_donations.xml" value="0.25416666666666665" />
+        <entry key="..\:/src/ACHIFApp/app/src/main/res/layout/fragment_donations.xml" value="0.1" />
         <entry key="..\:/src/ACHIFApp/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
-        <entry key="..\:/src/ACHIFApp/app/src/main/res/layout/fragment_listing.xml" value="0.15052083333333333" />
+        <entry key="..\:/src/ACHIFApp/app/src/main/res/layout/fragment_listing.xml" value="0.1" />
         <entry key="..\:/src/ACHIFApp/app/src/main/res/layout/fragment_notifications.xml" value="0.25416666666666665" />
-        <entry key="..\:/src/ACHIFApp/app/src/main/res/layout/fragment_requests.xml" value="0.15052083333333333" />
+        <entry key="..\:/src/ACHIFApp/app/src/main/res/layout/fragment_requests.xml" value="0.1" />
+        <entry key="..\:/src/ACHIFApp/app/src/main/res/layout/request_item.xml" value="0.13958333333333334" />
         <entry key="..\:/src/ACHIFApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/src/ACHIFApp/app/src/main/res/xml/file_paths.xml" value="0.15729166666666666" />
       </map>
