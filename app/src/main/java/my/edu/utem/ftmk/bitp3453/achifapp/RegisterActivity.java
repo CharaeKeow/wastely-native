@@ -12,10 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegisterActivity extends AppCompatActivity
 {
@@ -25,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity
     ProgressDialog progressDialog;
     FirebaseAuth mAuth;
     FirebaseUser mUser;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +75,22 @@ public class RegisterActivity extends AppCompatActivity
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful())
                     {
+                        String userName = name.getText().toString();
+                        String userEmail = email.getText().toString();
+                        String userPhoneNo = password.getText().toString();
+
+                        //get current user
+                        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+                        db = FirebaseFirestore.getInstance();
+
+                        //create reference to Firestore collection
+                        CollectionReference dbUser = db.collection("user");
+
+                        User user = new User(currentUser.getUid(), userName, userEmail, userPhoneNo);
+
+                        dbUser.add(user);
+
                         progressDialog.dismiss();
                         sendUserToNextActivity();
                         Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();

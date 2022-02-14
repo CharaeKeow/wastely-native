@@ -39,14 +39,12 @@
             android:foregroundServiceType="location"
             tools:ignore="Instantiatable">
         </service>
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <activity
             android:name=".MapsActivity"
             android:exported="false"
@@ -61,7 +59,6 @@
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="my.edu.utem.ftmk.bitp3453.achifapp"
@@ -71,10 +68,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-        <activity
-            android:name=".CameraActivity"
-            android:exported="false" />
         <activity
             android:name=".AddDonationActivity"
             android:exported="false"
